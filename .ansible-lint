@@ -5,6 +5,7 @@ parseable: true
 skip_list:
   - 'git-latest'
   - 'package-latest'
+  - 'meta-no-tags'
 # tags:
 #   - run_this_tag
 use_default_rules: true
