@@ -2,9 +2,6 @@ exclude_paths:
   - .github
   - ./molecule
 parseable: true
-# quiet: true
-# rulesdir:
-#   - ./rule/directory/
 skip_list:
   - 'git-latest'
   - 'package-latest'
