@@ -1,0 +1,14 @@
+exclude_paths:
+  - .github
+  - ./molecule
+parseable: true
+# quiet: true
+# rulesdir:
+#   - ./rule/directory/
+skip_list:
+  - 'git-latest'
+  - 'package-latest'
+# tags:
+#   - run_this_tag
+use_default_rules: true
+verbosity: 1

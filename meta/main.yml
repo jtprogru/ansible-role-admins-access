@@ -1,0 +1,29 @@
+---
+galaxy_info:
+  role_name: admins_access
+  author: Mihael Savin
+  description: Manage admin access
+  company: SysOps
+
+  license: WTFPL
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+    - name: Debian
+      versions:
+        - stretch
+        - buster
+    - name: EL
+      versions:
+        - 7
+
+  galaxy_tags:
+    - access
+    - admins-access
+    - configure
+
+dependencies: []

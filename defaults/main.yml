@@ -1,0 +1,14 @@
+---
+# Group name for admins
+admins_access_admins_group: admins
+
+# SSH keys and logins for remote access
+admins_access_admin_department:
+  - name: "jtprogru"
+    key: https://github.com/jtprogru.keys
+
+# Special login for some magic automation
+admins_access_special_user_login:
+  user: "automator"
+  passwd: "automator"
+  key: https://github.com/jtprogru.keys

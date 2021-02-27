@@ -1,0 +1,45 @@
+---
+- name: "ensure is admins group is present"
+  group:
+    name: "{{ admins_access_admins_group }}"
+    state: present
+  tags: ["group", "create"]
+
+- name: "all logins for admins is present"
+  user:
+    name: "{{ item.name }}"
+    shell: /bin/bash
+    groups: ["{{ admins_access_admins_group }}"]
+  with_items: "{{ admins_access_admin_department }}"
+  tags: ["users", "create"]
+
+- name: "sudoers is configured"
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%{{ admins_access_admins_group }} ALL='
+    line: '%{{ admins_access_admins_group }} ALL=(ALL) NOPASSWD: ALL'
+    validate: /usr/sbin/visudo -cf %s
+  tags: ["sudoer", "update"]
+
+- name: "ensure is configured authorized keys for all admins"
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.key }}"
+  with_items: "{{ admins_access_admin_department }}"
+  tags: ["users", "keys"]
+
+- name: "ensure is special magic account is present"
+  user:
+    name: "{{ admins_access_special_user_login.user }}"
+    shell: /bin/bash
+    groups: ["{{ admins_access_admins_group }}"]
+    password: "{{ admins_access_special_user_login.passwd | password_hash('sha512') }}"
+    update_password: on_create
+  tags: ["users", "create", "special"]
+
+- name: "ensure is configured authorized keys for {{ admins_access_special_user_login.user }}"
+  authorized_key:
+    user: "{{ admins_access_special_user_login.user }}"
+    key: "{{ admins_access_special_user_login.key }}"
+  tags: ["users", "keys", "special"]
